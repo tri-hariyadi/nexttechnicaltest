@@ -2,7 +2,23 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {formatter} from '@/utils/currencyFormatter';
 
-const ProductDetail = ({product}: any) => {
+type Props = {
+    product?: {
+        id: number,
+        title: string,
+        description: string,
+        price: number,
+        discountPercentage: number,
+        rating: number,
+        stock: number,
+        brand: string,
+        category: string,
+        thumbnail: string,
+        images: Array<string>
+    }
+}
+
+const ProductDetail = ({product}: Props) => {
     const [imageIsView, setImageIsView] = useState<string>('');
 
     useEffect(() => {
@@ -45,24 +61,24 @@ const ProductDetail = ({product}: any) => {
                     </div>
                 </div>
                 <div className='basis-1/2'>
-                    <h1 className='text-3xl font-bold mb-2'>{product?.title}</h1>
-                    <p className='mb-3'>rating {product?.rating}</p>
+                    <h1 className='text-3xl font-bold mb-1'>{product?.title}</h1>
+                    <p className='mb-3 text-yellow-500 font-semibold'>Rating {product?.rating}</p>
                     <p className='text-3xl mb-2'>{formatter(product?.price || 0)}</p>
                     <p className='mb-3'>{product?.description}</p>
                     <p className='font-bold text-lg mb-1 text-teal-500'>Detail</p>
                     <div className="h-[1px] w-full bg-teal-500 mb-2"></div>
                     <ul>
                         <li>
-                            <p>brand: {product?.brand}</p>
+                            <p className='capitalize'>▶️ <span className='font-semibold'>Brand:</span> {product?.brand}</p>
                         </li>
                         <li>
-                            <p>stock: {product?.stock}</p>
+                            <p className='mt-2 capitalize'>▶️ <span className="font-semibold">Stock:</span> {product?.stock}</p>
                         </li>
                         <li>
-                            <p>category: {product?.category}</p>
+                            <p className='mt-2 capitalize'>▶️ <span className="font-semibold">Category:</span> {product?.category}</p>
                         </li>
                         <li>
-                            <p>discount: {product?.discountPercentage}%</p>
+                            <p className='mt-2 capitalize'>▶️ <span className="font-semibold">Discount:</span> {product?.discountPercentage}%</p>
                         </li>
                     </ul>
                 </div>
